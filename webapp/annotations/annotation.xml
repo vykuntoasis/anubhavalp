@@ -1,0 +1,375 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/sap/ZVT_SB_BOOKING_ANALYTICS/$metadata">
+        <edmx:Include Namespace="cds_zvt_fe_booking_analytics"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+        <Annotations Target="cds_zvt_fe_booking_analytics.BookingType">
+          <Annotation Term="UI.SelectionFields" >
+              <Collection>
+                  <PropertyPath>AgencyID</PropertyPath>
+                  <PropertyPath>CarrierID</PropertyPath>
+                  <PropertyPath>FlightDate</PropertyPath>
+                  <PropertyPath>CustomerID</PropertyPath>
+              </Collection>
+          </Annotation>
+          
+            <Annotation Term="UI.LineItem" >
+                <Collection>
+                    <Record Type="UI.DataField">
+                        <PropertyValue Property="Value" Path="CustomerID"/>
+                    </Record>
+                    <Record Type="UI.DataField">
+                        <PropertyValue Property="Value" Path="AgencyID"/>
+                    </Record>
+                    <Record Type="UI.DataField">
+                        <PropertyValue Property="Value" Path="FlightDate"/>
+                    </Record>
+                    <Record Type="UI.DataField">
+                        <PropertyValue Property="Value" Path="FlightPrice"/>
+                    </Record>
+                </Collection>
+            </Annotation>
+             
+            <Annotation Term="UI.Chart" Qualifier="Chart01">
+                <Record Type="UI.ChartDefinitionType">
+                    <PropertyValue Property="Description" String="{@i18n>topAirlines}"/>
+                    <PropertyValue Property="Title" String="{@i18n>priceByAirline}"/>
+                    <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+                    <PropertyValue Property="Dimensions">
+                        <Collection>
+                            <PropertyPath>CarrierName</PropertyPath>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="DimensionAttributes">
+                        <Collection>
+                            <Record Type="UI.ChartDimensionAttributeType">
+                                <PropertyValue Property="Dimension" PropertyPath="CarrierName"/>
+                                <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="Measures">
+                        <Collection>
+                            <PropertyPath>FlightPrice</PropertyPath>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="MeasureAttributes">
+                        <Collection>
+                            <Record Type="UI.ChartMeasureAttributeType">
+                                <PropertyValue Property="Measure" PropertyPath="FlightPrice"/>
+                                <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="UI.PresentationVariant">
+                <Record Type="UI.PresentationVariantType">
+                    <PropertyValue Property="Text" String="Default"/>
+                    <PropertyValue Property="SortOrder">
+                        <Collection>
+                            <Record Type="Common.SortOrderType">
+                                <PropertyValue Property="Property" PropertyPath="FlightPrice"/>
+                                <PropertyValue Property="Descending" Bool="false"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                    
+                    <PropertyValue Property="IncludeGrandTotal" Bool="false"/>
+                    <PropertyValue Property="InitialExpansionLevel" Int="0"/>
+                    <PropertyValue Property="Visualizations">
+                        <Collection>
+                            <AnnotationPath>@UI.LineItem</AnnotationPath>
+                            <AnnotationPath>@UI.Chart#Chart01</AnnotationPath>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="UI.Chart" Qualifier="chart02">
+                <Record Type="UI.ChartDefinitionType">
+                    <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Bar"/>
+                    <PropertyValue Property="Title" String="Filterbyagency"/>
+                    <PropertyValue Property="Dimensions">
+                        <Collection>
+                            <PropertyPath>AgencyID</PropertyPath>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="DimensionAttributes">
+                        <Collection>
+                            <Record Type="UI.ChartDimensionAttributeType">
+                                <PropertyValue Property="Dimension" PropertyPath="AgencyID"/>
+                                <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="Measures">
+                        <Collection>
+                            <PropertyPath>FlightPrice</PropertyPath>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="MeasureAttributes">
+                        <Collection>
+                            <Record Type="UI.ChartMeasureAttributeType">
+                                <PropertyValue Property="Measure" PropertyPath="FlightPrice"/>
+                                <PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#Colorforagency"/>
+                                <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="UI.PresentationVariant" Qualifier="pricebyagency">
+                <Record Type="UI.PresentationVariantType">
+                    <PropertyValue Property="Visualizations">
+                        <Collection>
+                            <AnnotationPath>@UI.Chart#chart02</AnnotationPath>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+
+            </Annotation>
+            <Annotation Term="UI.Chart"  Qualifier="PriceByCustomer">
+                <Record Type="UI.ChartDefinitionType"  >
+                    <PropertyValue Property="Title" String="FilterbyCustomer"/>
+                    <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut" />
+                    <PropertyValue Property="Dimensions">
+                        <Collection>
+                            <PropertyPath>CustomerID</PropertyPath>
+                        </Collection>
+                    </PropertyValue>     
+                    <PropertyValue Property="Measures">
+                        <Collection>
+                            <PropertyPath>FlightPrice</PropertyPath>
+                        </Collection>
+                    </PropertyValue>               
+                </Record>                 
+                  
+            </Annotation>
+            <Annotation Term="UI.Chart" Qualifier="lineChart" >
+                <Record Type="UI.ChartDefinitionType" >
+                    <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Line" />
+                    <PropertyValue Property="Dimensions">
+                        <Collection>
+                            <PropertyPath>BookingDateYear</PropertyPath>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="Measures">
+                        <Collection>
+                            <PropertyPath>FlightPrice</PropertyPath>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="UI.PresentationVariant" Qualifier="presentLineChart">
+                <Record Type="UI.PresentationVariantType">
+                    <PropertyValue Property="Visualizations">
+                        <Collection>
+                            <AnnotationPath>@UI.Chart#lineChart</AnnotationPath>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="UI.PresentationVariant" Qualifier="PresentPricebyCustomer">
+                <Record Type="UI.PresentationVariantType">
+                    <PropertyValue Property="Visualizations">
+                        <Collection>
+                            <AnnotationPath>@UI.Chart#PriceByCustomer</AnnotationPath>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            
+            <Annotation Term="UI.DataPoint" Qualifier="Colorforagency">
+                <Record Type="UI.DataPointType">
+                    <PropertyValue Property="Value" String="FlightPrice"/>
+                    <!-- <PropertyValue Property="ValueFormat">
+                        <Record Type="UI.NumberFormat">
+                            <PropertyValue Property="ScaleFactor" Decimal="2"/>
+                            <PropertyValue Property="NumberOfFractionalDigits" Int="100000"/>
+                        </Record>
+                    </PropertyValue> -->
+                    
+                    <PropertyValue Property="CriticalityCalculation">
+                        <Record Type="UI.CriticalityCalculationType">
+                            <PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>
+                            <PropertyValue Property="ToleranceRangeLowValue" Int="516000"/>
+                            <PropertyValue Property="DeviationRangeLowValue" Int="513456"/>
+                            
+                        </Record>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            
+            
+            <Annotation Term="UI.DataPoint" Qualifier="DPflightprice">
+                <Record Type="UI.DataPointType">
+                    <PropertyValue Property="Title" String="Flightprice"/>
+                    <PropertyValue Property="Description" String="REPLACE_WITH_DATAPOINT_DESCRIPTION"/>
+                    <PropertyValue Property="Value" Path="FlightPrice"/>
+                    <PropertyValue Property="CriticalityCalculation">
+                        <Record Type="UI.CriticalityCalculationType">
+                            <PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>
+                            <PropertyValue Property="ToleranceRangeLowValue" Int="56000000"/>
+                            <PropertyValue Property="DeviationRangeLowValue" Int="30000000"/>
+                        </Record>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="UI.SelectionVariant" Qualifier="SVqualifier">
+                 <Record>
+                <PropertyValue Property="Parameters">
+                    <Collection>
+                        <Record Type="UI.Parameter">
+                            <PropertyValue Property="PropertyName" PropertyPath="REPLACE_WITH_PARAMETER_PATH" />
+                            <PropertyValue Property="PropertyValue" String="REPLACE_WITH_PARAMETER_VALUE" />
+                        </Record>
+                    </Collection>
+                </PropertyValue>
+                <PropertyValue Property="SelectOptions">
+                    <Collection>
+                        <Record Type="UI.SelectOptionType">
+                            <PropertyValue Property="PropertyName" PropertyPath="REPLACE_WITH_FILTER_PROPERTY" />
+                            <PropertyValue Property="Ranges">
+                                <Collection>
+                                    <Record Type="UI.SelectionRangeType">
+                                        <PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I" />
+                                        <PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ" />
+                                        <PropertyValue Property="Low" String="REPLACE_WITH_FILTER_VALUE" />
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </PropertyValue>
+            </Record>
+            </Annotation>
+            <Annotation Term="UI.Chart" Qualifier="CQ01">
+                <Record Type="UI.ChartDefinitionType">
+                    <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+                    <PropertyValue Property="Dimensions">
+                        <Collection>
+                            <PropertyPath>AgencyName</PropertyPath>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="DimensionAttributes">
+                        <Collection>
+                            <Record Type="UI.ChartDimensionAttributeType">
+                                <PropertyValue Property="Dimension" PropertyPath="AgencyName"/>
+                                <PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="Measures">
+                        <Collection>
+                            <PropertyPath>FlightPrice</PropertyPath>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="MeasureAttributes">
+                        <Collection>
+                            <Record Type="UI.ChartMeasureAttributeType">
+                                <PropertyValue Property="Measure" PropertyPath="FlightPrice"/>
+                                <PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="UI.PresentationVariant" Qualifier="PV01">
+                <Record>
+                    <PropertyValue Property="SortOrder">
+                        <Collection>
+                            <Record Type="Common.SortOrderType">
+                                <PropertyValue Property="Property" PropertyPath="FlightPrice"/>
+                                <PropertyValue Property="Descending" Bool="false"/>
+                            </Record>
+                        </Collection>
+                    </PropertyValue>
+                    <PropertyValue Property="Visualizations">
+                        <Collection>
+                            <AnnotationPath>@UI.Chart#CQ01</AnnotationPath>
+                        </Collection>
+                    </PropertyValue>
+                </Record>
+            </Annotation>
+            <Annotation Term="UI.KPI" Qualifier="KP01">
+                <Record Type="UI.KPIType">
+                    <PropertyValue Property="DataPoint" Path="@UI.DataPoint#DPflightprice" />
+                <!-- <PropertyValue Property="SelectionVariant" Path="@UI.SelectionVariant#SVqualifier" /> -->
+                <PropertyValue Property="ID" String="idKPI01" />
+                <PropertyValue Property="Detail">
+                    <Record Type="UI.KPIDetailType">
+                    
+                        <PropertyValue Property="SemanticObject" String="REPLACE_WITH_SEMANTIC_OBJECT" />
+                        <PropertyValue Property="Action" String="REPLACE_WITH_ACTION" />
+                        <PropertyValue Property="DefaultPresentationVariant" Path="@UI.PresentationVariant#PV01" />
+                    </Record>
+                </PropertyValue>
+                </Record>
+            </Annotation>
+         </Annotations>
+
+         <Annotations Target="cds_zvt_fe_booking_analytics.BookingType/BookingDateYear">
+           <!-- <Annotation Term="Common.FilterDefaultValue">
+               <String>2023</String>
+           </Annotation> -->
+            
+             <Annotation Term="Common.ValueList">
+                 <Record Type="Common.ValueListType">
+                     <PropertyValue Property="CollectionPath" String="Booking"/>
+                     <PropertyValue Property="PresentationVariantQualifier" String="presentLineChart"/>
+                      <PropertyValue Property="Parameters">
+                          <Collection>
+                              <Record Type="Common.ValueListParameterInOut">
+                                  <PropertyValue Property="LocalDataProperty" PropertyPath="BookingDateYear"/>
+                                  <PropertyValue Property="ValueListProperty" String="BookingDateYear"/>
+                              </Record>
+                          </Collection>
+                      </PropertyValue>
+                 </Record>
+             </Annotation>
+         </Annotations>
+             <Annotations Target="cds_zvt_fe_booking_analytics.BookingType/CustomerID">
+                 <Annotation Term="Common.ValueList">
+                     <Record Type="Common.ValueListType">
+                         <PropertyValue Property="CollectionPath" String="Booking"/>
+                         <PropertyValue Property="PresentationVariantQualifier" String="PresentPricebyCustomer"/>
+                            <PropertyValue Property="Parameters">
+                                <Collection>
+                                    <Record Type="Common.ValueListParameterInOut">
+                                        <PropertyValue Property="LocalDataProperty" PropertyPath="AgencyID"/>
+                                        <PropertyValue Property="ValueListProperty" String="AgencyID"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                     </Record>
+                 </Annotation>
+             </Annotations>       
+            <Annotations Target="cds_zvt_fe_booking_analytics.BookingType/AgencyID">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Booking"/>
+                        <PropertyValue Property="PresentationVariantQualifier" String="pricebyagency"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="AgencyID"/>
+                                    <PropertyValue Property="ValueListProperty" String="AgencyID"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
