@@ -1,0 +1,255 @@
+{
+    "_version": "1.42.0",
+    "sap.app": {
+        "id": "anubhavovp",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:ovp",
+            "version": "1.11.4",
+            "toolsId": "57704922-ae35-429f-9b7f-e2805c7fd45e"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZVT_SB_BOOKING_ANALYTICS/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZVT_SB_BOOKING_ANALYTICS_VAN",
+                        "annotation"
+                    ],
+                    "localUri": "localService/mainService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZVT_SB_BOOKING_ANALYTICS_VAN": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZVT_SB_BOOKING_ANALYTICS_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/mainService/ZVT_SB_BOOKING_ANALYTICS_VAN.xml"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            },
+            "ZVT_SB_TRAVEL2_Annotation": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZVT_SB_TRAVEL_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZVT_SB_TRAVEL2/ZVT_SB_TRAVEL2_Annotation.xml"
+                }
+            },
+            "ZVT_SB_TRAVEL2": {
+                "uri": "/sap/opu/odata/sap/ZVT_SB_TRAVEL/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZVT_SB_TRAVEL2_Annotation",
+                        "annotation0"
+                    ],
+                    "localUri": "localService/ZVT_SB_TRAVEL2/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation0": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation0.xml",
+                "settings": {
+                    "localUri": "annotations/annotation0.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.102.8",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.f": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ovp": {},
+                "sap.ui.rta": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "anubhavovp.i18n.i18n"
+                }
+            },
+            "mainModel": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "ZVT_SB_TRAVEL2": {
+                "dataSource": "ZVT_SB_TRAVEL2",
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "Inline"
+                }
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [],
+            "targets": {}
+        }
+    },
+    "sap.ovp": {
+        "globalFilterModel": "mainModel",
+        "globalFilterEntityType": "BookingType",
+        "containerLayout": "resizable",
+        "enableLiveFilter": true,
+        "considerAnalyticalParameters": false,
+        "cards": {
+            "card0": {
+                "model": "mainModel",
+                "template": "sap.ovp.cards.charts.analytical",
+                "settings": {
+                    "title": "Pricebydate",
+                    "entitySet": "Booking",
+                    "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#PricebyDataPoint",
+                    "subTitle": "Monthly",
+                    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#PricebyDatePresentation",
+                    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#PriceByDateChart"
+                }
+            },
+            "card001": {
+                "model": "mainModel",
+                "template": "sap.ovp.cards.linklist",
+                "settings": {
+                    "title": "REPLACE_WITH_TITLE",
+                    "listFlavor": "standard",
+                    "staticContent": [
+                        {
+                            "title": "ui5 and fiori training",
+                            "subTitle": "not stop learing",
+                            "imageUri": "https://static.wixstatic.com/media/11062b_0f10d1a3bc8e4fb1ba089c42056efe9b~mv2.jpg/v1/fill/w_2222,h_975,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/11062b_0f10d1a3bc8e4fb1ba089c42056efe9b~mv2.jpg",
+                            "targetUri": "https://www.anubhavtrainings.com/security-launchpad-training",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "ui5 and fiori training",
+                            "subTitle": "not stop learing",
+                            "imageUri": "https://static.wixstatic.com/media/11062b_0f10d1a3bc8e4fb1ba089c42056efe9b~mv2.jpg/v1/fill/w_2222,h_975,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/11062b_0f10d1a3bc8e4fb1ba089c42056efe9b~mv2.jpg",
+                            "targetUri": "https://www.anubhavtrainings.com/security-launchpad-training",
+                            "openInNewWindow": true
+                        },
+                        {
+                            "title": "ui5 and fiori training",
+                            "subTitle": "not stop learing",
+                            "imageUri": "https://static.wixstatic.com/media/11062b_0f10d1a3bc8e4fb1ba089c42056efe9b~mv2.jpg/v1/fill/w_2222,h_975,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/11062b_0f10d1a3bc8e4fb1ba089c42056efe9b~mv2.jpg",
+                            "targetUri": "https://www.anubhavtrainings.com/security-launchpad-training",
+                            "openInNewWindow": true
+                        }
+                    ],
+                    "targetUri": "https;//www.google.com"
+                }
+            },
+            "card003": {
+                "model": "ZVT_SB_TRAVEL2",
+                "template": "sap.ovp.cards.table",
+                "settings": {
+                    "title": "tablecard",
+                    "entitySet": "Travel",
+                    "tabs": [
+                        {
+                            "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#Pricebyagency",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Agency70034selection",
+                            "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#DP01",
+                            "value": "70034"
+                        },
+                        {
+                            "annotationPath": "com.sap.vocabularies.UI.v1.LineItem#Pricebyagency",
+                            "selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#Agency70036selection",
+                            "dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#DP01",
+                            "value": "70036"
+                        }
+                    ]
+                }
+            },
+            "card004": {
+                "model": "ZVT_SB_TRAVEL2",
+                "template": "sap.ovp.cards.charts.analytical",
+                "settings": {
+                    "title": "donutchart",
+                    "entitySet": "Travel",
+                    "presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#PV01",
+                    "chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#CQ01"
+                }
+            },
+            "car005": {
+                "model": "ZVT_SB_TRAVEL2",
+                "template": "sap.ovp.cards.linklist",
+                "settings": {
+                    "title": "agendy",
+                    "entitySet": "Travel",
+                    "subTitle": "agency",
+                    "listFlavor": "standard",
+                    "sortOrder": "ascending",
+                    "sortBy": "REPLACE_WITH_SORT_BY",
+                    "defaultSpan": {
+                        "rows": 20,
+                        "cols": 2
+                    }
+                }
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "analytical"
+    }
+}

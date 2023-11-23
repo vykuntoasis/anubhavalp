@@ -295,10 +295,12 @@
                         </Collection>
                     </PropertyValue>
                     <PropertyValue Property="Visualizations">
+                      
                         <Collection>
                             <AnnotationPath>@UI.Chart#CQ01</AnnotationPath>
                         </Collection>
                     </PropertyValue>
+                    
                 </Record>
             </Annotation>
             <Annotation Term="UI.KPI" Qualifier="KP01">

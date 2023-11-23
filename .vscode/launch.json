@@ -1,5 +1,4 @@
 {
-  "version": "0.2.0",
   "configurations": [
     {
       "name": "anuabhavalp-config1",
@@ -26,6 +25,91 @@
         "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/sap\",\"url\":\"http://122.162.240.164:8030\",\"client\":\"800\",\"destination\":\"S4H\"}]",
         "FIORI_TOOLS_URL_PARAMS": "sap-ui-xx-viewCache=false"
       }
+    },
+    {
+      "name": "Start anubhavovp",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "cwd": "${workspaceFolder}/anubhavovp",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "args": [
+        "--open",
+        "test/flpSandbox.html#anubhavovp-tile"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "port": 9229,
+      "env": {
+        "DEBUG": "--inspect",
+        "FIORI_TOOLS_URL_PARAMS": "sap-client=800&sap-ui-xx-viewCache=false",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/anuabhavalp/anubhavovp\"}"
+      }
+    },
+    {
+      "name": "Start anubhavovp Mock",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/anubhavovp",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "args": [
+        "--config",
+        "./ui5-mock.yaml",
+        "--open",
+        "test/flpSandbox.html#anubhavovp-tile"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "port": 9229,
+      "env": {
+        "FIORI_TOOLS_URL_PARAMS": "sap-client=800&sap-ui-xx-viewCache=false",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/anuabhavalp/anubhavovp\"}"
+      }
+    },
+    {
+      "name": "Start anubhavovp Local",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/anubhavovp",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": [
+        "fiori",
+        "run"
+      ],
+      "args": [
+        "--config",
+        "./ui5-local.yaml",
+        "--open",
+        "test/flpSandbox.html#anubhavovp-tile"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "port": 9229,
+      "env": {
+        "FIORI_TOOLS_URL_PARAMS": "sap-client=800&sap-ui-xx-viewCache=false",
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/anuabhavalp/anubhavovp\"}"
+      }
     }
-  ]
+  ],
+  "compounds": [],
+  "version": "0.2.0"
 }
